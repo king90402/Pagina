@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raíces Vivas</title>
+    <title>Raíces Vivas de Pueblo Nuevo</title>
     <link rel="icon" type="image/jpeg" href="Imagenes/Bandera.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -167,6 +167,21 @@
             display: flex;
             justify-content: center;
             padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--neutral-700);
+            cursor: pointer;
+            padding: 1rem;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         nav ul {
@@ -299,45 +314,42 @@
         }
 
         .paisajes-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-xl);
-    max-width: 600px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
-    z-index: 2;
-}
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-xl);
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
+            z-index: 2;
+        }
 
-.paisajes-slider {
-    display: flex;
-    transition: transform 0.6s ease-out;
-    width: 100%;
-}
+        .paisajes-slider {
+            display: flex;
+            transition: transform 0.6s ease-out;
+            width: 100%;
+        }
 
-.paisaje-slide {
-    min-width: 100%;
-    position: relative;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
-    overflow: hidden;
-    flex-shrink: 0;
-}
+        .paisaje-slide {
+            min-width: 100%;
+            position: relative;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
 
-.paisaje-slide img {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-    object-position: center;
-    transition: transform var(--transition);
-}
-
-/* Agregar overlay con información de la imagen */
-
+        .paisaje-slide img {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform var(--transition);
+        }
 
         .slider-controls {
             position: absolute;
@@ -748,21 +760,42 @@
             transform: translateY(0);
         }
 
-        /* Responsive design */
+        /* Responsive design mejorado */
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0;
+                flex-direction: column;
+            }
+            
+            .nav-toggle {
+                display: block;
             }
             
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 0.5rem;
+                flex-direction: column;
+                width: 100%;
+                background: var(--white);
+                box-shadow: var(--shadow-md);
+                border-radius: 0 0 0.5rem 0.5rem;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                z-index: 1000;
+            }
+            
+            nav ul.show {
+                display: flex;
             }
             
             nav a {
-                padding: 0.75rem 1rem;
-                font-size: 0.9rem;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+                text-align: center;
+            }
+            
+            nav li:last-child a {
+                border-bottom: none;
             }
             
             .header-logos {
@@ -777,6 +810,7 @@
             
             .hero {
                 padding: 4rem 1rem;
+                min-height: 60vh;
             }
             
             .content-grid {
@@ -823,24 +857,9 @@
         }
 
         @media (max-width: 480px) {
-            nav ul {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            nav a {
-                padding: 0.75rem;
-                border-bottom: 1px solid rgba(234, 88, 12, 0.2);
-                width: 100%;
-                text-align: center;
-            }
-            
-            nav li:last-child a {
-                border-bottom: none;
-            }
-            
             .hero {
                 padding: 3rem 1rem;
+                min-height: 50vh;
             }
             
             .section-content {
@@ -850,18 +869,15 @@
             .paisaje-slide {
                 height: 350px;
             }
-        }
-
-        @media (max-width: 768px) {
-            .paisaje-slide {
-                height: 500px;
+            
+            .slider-controls {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
-        }
-
-        @media (max-width: 480px) {
-            .paisaje-slide {
-                height: 450px;
-            }
+            
+            .prev-btn { left: 0.5rem; }
+            .next-btn { right: 0.5rem; }
         }
     </style>
 </head>
@@ -884,12 +900,15 @@
 
     <nav>
         <div class="nav-container">
-            <ul>
-                <li><a href="#paisajes">Paisajes</a></li>
-                <li><a href="#historia">Historia</a></li>
-                <li><a href="#tradiciones">Tradiciones</a></li>
-                <li><a href="#turismo">Sitios Turísticos</a></li>
-                <li><a href="#comercio">Comercio Local</a></li>
+            <button class="nav-toggle" onclick="toggleMenu()" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="navMenu">
+                <li><a href="#paisajes" onclick="closeMenu()">Paisajes</a></li>
+                <li><a href="#historia" onclick="closeMenu()">Historia</a></li>
+                <li><a href="#tradiciones" onclick="closeMenu()">Tradiciones</a></li>
+                <li><a href="#turismo" onclick="closeMenu()">Sitios Turísticos</a></li>
+                <li><a href="#comercio" onclick="closeMenu()">Comercio Local</a></li>
             </ul>
         </div>
     </nav>
@@ -906,25 +925,25 @@
             <h2 class="paisajes-title">Paisajes de Pueblo Nuevo</h2>
             <div class="paisajes-container">
                 <div class="paisajes-slider" id="paisajesSlider">
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 1.jpg" alt="Atardecer en el Río San Jorge" loading="lazy">
-    </div>
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 2.jpg" alt="Campos verdes de la sabana" loading="lazy">
-    </div>
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 3.jpg" alt="Amanecer en el centro del pueblo" loading="lazy">
-    </div>
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 4.jpg" alt="Bosques nativos" loading="lazy">
-    </div>
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 5.jpg" alt="Cielos infinitos" loading="lazy">
-    </div>
-    <div class="paisaje-slide">
-        <img src="Imagenes/Paisaje 6.jpg" alt="Senderos rurales" loading="lazy">
-    </div>
-</div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 1.jpg" alt="Atardecer Vereda Los Limones" loading="lazy">
+                    </div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 2.jpg" alt="Via Piñalito" loading="lazy">
+                    </div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 3.jpg" alt="Guayacan" loading="lazy">
+                    </div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 4.jpg" alt="Amanecer Vereda Aguas Claras" loading="lazy">
+                    </div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 5.jpg" alt="Amanecer Vereda Centro America" loading="lazy">
+                    </div>
+                    <div class="paisaje-slide">
+                        <img src="Imagenes/Paisaje 6.jpg" alt="Palma de Aceite" loading="lazy">
+                    </div>
+                </div>
                 <button class="slider-controls prev-btn" onclick="changeSlide(-1)" aria-label="Imagen anterior">
                     <i class="fas fa-chevron-left"></i>
                 </button>
@@ -1023,7 +1042,6 @@
                         <h3 class="business-name">Fiestas Patronales</h3>
                         <p>Festividades religiosas y culturales en honor a San Sebastián, con procesiones, danzas tradicionales y comidas típicas de la región.</p>
                     </div>
-                    
                     <div class="business-card">
                         <div class="business-icon">
                             <i class="fas fa-utensils"></i>
@@ -1156,54 +1174,70 @@
                 </div>
 
                 <div class="cards-grid">
-    <div class="info-card">
-        <div class="card-image">
-            <img src="Imagenes/Leña.png" alt="Leña Verde Restaurante Bar" loading="lazy">
-        </div>
-        <div class="card-content">
-            <h3 class="card-title">Leña Verde Restaurante Bar</h3>
-            <p class="card-description">Experiencia gastronómica única que combina los sabores tradicionales de la región con un ambiente acogedor y familiar.</p>
-            <ul class="card-features">
-                <li>Especialidades a la parrilla</li>
-                <li>Ambiente familiar y acogedor</li>
-                <li>Música en vivo los fines de semana</li>
-                <li>Terraza al aire libre</li>
-            </ul>
-        </div>
-    </div>
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Leña.png" alt="Leña Verde Restaurante Bar" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Leña Verde Restaurante Bar</h3>
+                            <p class="card-description">Experiencia gastronómica única que combina los sabores tradicionales de la región con un ambiente acogedor y familiar.</p>
+                            <ul class="card-features">
+                                <li>Especialidades a la parrilla</li>
+                                <li>Ambiente familiar y acogedor</li>
+                                <li>Música en vivo los fines de semana</li>
+                                <li>Terraza al aire libre</li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <div class="info-card">
-        <div class="card-image">
-            <img src="Imagenes/Mace.png" alt="MACÉ Restaurante" loading="lazy">
-        </div>
-        <div class="card-content">
-            <h3 class="card-title">MACÉ</h3>
-            <p class="card-description">Restaurante que ofrece una propuesta culinaria moderna con toques tradicionales, destacando por su excelente servicio y calidad.</p>
-            <ul class="card-features">
-                <li>Cocina moderna y tradicional</li>
-                <li>Ingredientes frescos locales</li>
-                <li>Servicio de primera calidad</li>
-                <li>Ambiente elegante y moderno</li>
-            </ul>
-        </div>
-    </div>
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Mace.png" alt="MACÉ Restaurante" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">MACÉ</h3>
+                            <p class="card-description">Restaurante que ofrece una propuesta culinaria moderna con toques tradicionales, destacando por su excelente servicio y calidad.</p>
+                            <ul class="card-features">
+                                <li>Cocina moderna y tradicional</li>
+                                <li>Ingredientes frescos locales</li>
+                                <li>Servicio de primera calidad</li>
+                                <li>Ambiente elegante y moderno</li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <div class="info-card">
-        <div class="card-image">
-            <img src="Imagenes/Donde.png" alt="Donde PETRA Restaurante" loading="lazy">
-        </div>
-        <div class="card-content">
-            <h3 class="card-title">Donde PETRA</h3>
-            <p class="card-description">Restaurante tradicional que mantiene viva la esencia de la cocina cordobesa con recetas familiares transmitidas de generación en generación.</p>
-            <ul class="card-features">
-                <li>Cocina tradicional cordobesa</li>
-                <li>Recetas familiares auténticas</li>
-                <li>Atención personalizada</li>
-                <li>Ambiente tradicional y cálido</li>
-            </ul>
-        </div>
-    </div>
-</div>
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Donde.png" alt="Donde PETRA Restaurante" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Donde PETRA</h3>
+                            <p class="card-description">Restaurante tradicional que mantiene viva la esencia de la cocina cordobesa con recetas familiares transmitidas de generación en generación.</p>
+                            <ul class="card-features">
+                                <li>Cocina tradicional cordobesa</li>
+                                <li>Recetas familiares auténticas</li>
+                                <li>Atención personalizada</li>
+                                <li>Ambiente tradicional y cálido</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Ranchos.jpg" alt="Centro Social Los Ranchos" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Centro Social Los Ranchos</h3>
+                            <p class="card-description">Espacio gastronómico y social que combina la tradición culinaria local con un ambiente festivo y acogedor, ideal para celebraciones y encuentros familiares.</p>
+                            <ul class="card-features">
+                                <li>Eventos sociales y celebraciones</li>
+                                <li>Comida tradicional cordobesa</li>
+                                <li>Amplio espacio para grupos</li>
+                                <li>Ambiente festivo y familiar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -1259,6 +1293,25 @@
             changeSlide(1);
         }, 5000);
 
+        // Navegación móvil
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.nav-toggle i');
+            
+            menu.classList.toggle('show');
+            toggle.classList.toggle('fa-bars');
+            toggle.classList.toggle('fa-times');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.nav-toggle i');
+            
+            menu.classList.remove('show');
+            toggle.classList.add('fa-bars');
+            toggle.classList.remove('fa-times');
+        }
+
         // Navegación suave
         document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1297,6 +1350,17 @@
                     el.classList.add('visible');
                 }
             });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.nav-toggle');
+            
+            if (!nav.contains(event.target) && menu.classList.contains('show')) {
+                closeMenu();
+            }
         });
     </script>
 </body>
