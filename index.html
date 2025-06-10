@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raíces Vivas</title>
+    <link rel="icon" type="image/jpeg" href="Imagenes/Bandera.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* Paleta de colores cálida y apropiada para el tema */
+            --primary-blue: #1e3a8a;
+            --primary-teal: #0f766e;
+            --accent-orange: #ea580c;
+            --accent-gold: #ca8a04;
+            --warm-red: #dc2626;
+            --forest-green: #166534;
+            
+            /* Fondos cálidos */
+            --cream: #fef7ed;
+            --light-orange: #fed7aa;
+            --light-blue: #dbeafe;
+            --light-teal: #ccfbf1;
+            
+            /* Neutros cálidos */
+            --neutral-50: #fafaf9;
+            --neutral-100: #f5f5f4;
+            --neutral-200: #e7e5e4;
+            --neutral-600: #57534e;
+            --neutral-700: #44403c;
+            --neutral-800: #292524;
+            --neutral-900: #1c1917;
+            --white: #ffffff;
+            
+            /* Gradientes temáticos */
+            --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+            --gradient-warm: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            --gradient-sunset: linear-gradient(135deg, #ca8a04 0%, #ea580c 50%, #dc2626 100%);
+            --gradient-nature: linear-gradient(135deg, #0f766e 0%, #166534 100%);
+            
+            /* Sombras */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--neutral-800);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header con colores cálidos */
+        header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 2rem 0;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(234, 88, 12, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(202, 138, 4, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-logos img {
+            width: 70px;
+            height: 70px;
+            border-radius: 1rem;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition);
+        }
+
+        .header-logos img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .header-title {
+            text-align: center;
+        }
+
+        .header-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-title .header-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            font-weight: 500;
+            color: var(--light-orange);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .header-description {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            max-width: 600px;
+            font-weight: 400;
+        }
+
+        /* Navegación con colores temáticos */
+        nav {
+            background: linear-gradient(90deg, var(--light-orange) 0%, var(--light-teal) 100%);
+            border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            color: var(--neutral-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 1rem 1.5rem;
+            transition: all var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-warm);
+            transition: all var(--transition);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: var(--warm-red);
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        nav a:hover::before {
+            width: 80%;
+        }
+
+        /* Hero section con overlay cálido */
+        .hero {
+            background: 
+                linear-gradient(135deg, rgba(30, 58, 138, 0.8), rgba(15, 118, 110, 0.7), rgba(234, 88, 12, 0.6)),
+                url('Imagenes/Rio.jpg') center/cover no-repeat;
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(202, 138, 4, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(22, 101, 52, 0.2) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 400;
+            opacity: 0.95;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Paisajes banner con fondo temático */
+        .paisajes-banner {
+            background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
+            padding: 4rem 0;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .paisajes-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(15, 118, 110, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
+        }
+
+        .paisajes-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .paisajes-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-xl);
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
+    z-index: 2;
+}
+
+.paisajes-slider {
+    display: flex;
+    transition: transform 0.6s ease-out;
+    width: 100%;
+}
+
+.paisaje-slide {
+    min-width: 100%;
+    position: relative;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--light-teal) 0%, var(--light-blue) 100%);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.paisaje-slide img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform var(--transition);
+}
+
+/* Agregar overlay con información de la imagen */
+
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: 2px solid var(--accent-orange);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--accent-orange);
+            transition: all var(--transition);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-controls:hover {
+            background: var(--accent-orange);
+            color: var(--white);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .prev-btn { left: 1rem; }
+        .next-btn { right: 1rem; }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(30, 58, 138, 0.3);
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .dot.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            transform: scale(1.2);
+        }
+
+        /* Secciones principales con fondos cálidos */
+        main {
+            padding: 4rem 0;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(234, 88, 12, 0.1);
+            position: relative;
+        }
+
+        .section-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-sunset);
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-warm);
+            border-radius: 2px;
+        }
+
+        /* Grid layouts */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .content-image {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 3px solid var(--light-orange);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+            color: var(--neutral-700);
+        }
+
+        /* Timeline con colores temáticos */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-nature);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-md);
+            margin: 0 2rem;
+            border: 2px solid var(--light-teal);
+            transition: all var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-teal);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: var(--gradient-warm);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 3px var(--primary-teal);
+        }
+
+        /* Cards grid con colores cálidos */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition);
+            border: 2px solid var(--light-orange);
+            position: relative;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-sunset);
+        }
+
+        .info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-orange);
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+            background: var(--light-teal);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition);
+        }
+
+        .info-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-description {
+            color: var(--neutral-600);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-features li {
+            font-size: 0.9rem;
+            color: var(--neutral-600);
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .card-features li::before {
+            content: '🌟';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Business cards */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .business-card {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition);
+            border: 2px solid var(--light-blue);
+            position: relative;
+        }
+
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-nature);
+            border-radius: 0.75rem 0.75rem 0 0;
+        }
+
+        .business-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-teal);
+        }
+
+        .business-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-warm);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .business-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary-blue);
+        }
+
+        /* Footer con gradiente cálido */
+        footer {
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(234, 88, 12, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(202, 138, 4, 0.15) 0%, transparent 50%);
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animaciones */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0.5rem;
+            }
+            
+            nav a {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .header-logos {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-logos img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .hero {
+                padding: 4rem 1rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .section-content {
+                padding: 2rem;
+            }
+            
+            .timeline::before {
+                left: 1rem;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                padding-left: 2.5rem;
+            }
+            
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .timeline-dot {
+                left: 1rem;
+            }
+            
+            .timeline-content {
+                margin: 0;
+            }
+            
+            .paisaje-slide {
+                height: 400px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .business-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                padding: 0.75rem;
+                border-bottom: 1px solid rgba(234, 88, 12, 0.2);
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav li:last-child a {
+                border-bottom: none;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .section-content {
+                padding: 1.5rem;
+            }
+            
+            .paisaje-slide {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .paisaje-slide {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .paisaje-slide {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-logos">
+                    <img src="Imagenes/Bandera.jpeg" alt="Bandera de Pueblo Nuevo" loading="lazy">
+                    <div class="header-title">
+                        <h1>Raíces Vivas</h1>
+                        <p class="header-subtitle">de Pueblo Nuevo</p>
+                    </div>
+                    <img src="Imagenes/Escudo.jpg" alt="Escudo de Pueblo Nuevo" loading="lazy">
+                </div>
+                <p class="header-description">Descubriendo nuestra historia, cultura y vida cotidiana en el corazón de Córdoba</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#paisajes">Paisajes</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#tradiciones">Tradiciones</a></li>
+                <li><a href="#turismo">Sitios Turísticos</a></li>
+                <li><a href="#comercio">Comercio Local</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>"Donde cada calle narra una historia y cada rostro refleja identidad."</h2>
+            <p>Descubre la esencia auténtica de Pueblo Nuevo</p>
+        </div>
+    </section>
+
+    <section id="paisajes" class="paisajes-banner">
+        <div class="container">
+            <h2 class="paisajes-title">Paisajes de Pueblo Nuevo</h2>
+            <div class="paisajes-container">
+                <div class="paisajes-slider" id="paisajesSlider">
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 1.jpg" alt="Atardecer en el Río San Jorge" loading="lazy">
+    </div>
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 2.jpg" alt="Campos verdes de la sabana" loading="lazy">
+    </div>
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 3.jpg" alt="Amanecer en el centro del pueblo" loading="lazy">
+    </div>
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 4.jpg" alt="Bosques nativos" loading="lazy">
+    </div>
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 5.jpg" alt="Cielos infinitos" loading="lazy">
+    </div>
+    <div class="paisaje-slide">
+        <img src="Imagenes/Paisaje 6.jpg" alt="Senderos rurales" loading="lazy">
+    </div>
+</div>
+                <button class="slider-controls prev-btn" onclick="changeSlide(-1)" aria-label="Imagen anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-controls next-btn" onclick="changeSlide(1)" aria-label="Siguiente imagen">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="historia">
+            <div class="section-content fade-in">
+                <h2 class="section-title">Origen y Trayectoria</h2>
+                <div class="content-grid">
+                    <div class="content-image">
+                        <img src="Imagenes/Plazas.jpeg" alt="Plaza histórica de Pueblo Nuevo" loading="lazy">
+                    </div>
+                    <div class="content-text">
+                        <p>Desde sus raíces como caserío Valparaíso en 1907, hasta su establecimiento como municipio en 1957, Pueblo Nuevo ha sido símbolo de esfuerzo colectivo, adaptación y resiliencia.</p>
+                        <p>Su historia se entrelaza con las luchas campesinas, el auge ganadero y el fortalecimiento comunitario, creando un legado de perseverancia y tradición que perdura hasta nuestros días.</p>
+                    </div>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1907</span>
+                            <h3 class="timeline-title">Caserío Valparaíso</h3>
+                            <p>Primeros asentamientos que darían origen a lo que hoy conocemos como Pueblo Nuevo.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1930s</span>
+                            <h3 class="timeline-title">Crecimiento Comunitario</h3>
+                            <p>Expansión de la comunidad y desarrollo de las primeras estructuras sociales y económicas.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1957</span>
+                            <h3 class="timeline-title">Establecimiento Municipal</h3>
+                            <p>Pueblo Nuevo es oficialmente reconocido como municipio independiente.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-year">1970s</span>
+                            <h3 class="timeline-title">Auge Ganadero</h3>
+                            <p>Fortalecimiento de la economía local a través de la ganadería y agricultura.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-year">2000s</span>
+                            <h3 class="timeline-title">Modernización</h3>
+                            <p>Desarrollo de infraestructura moderna y servicios públicos de calidad.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tradiciones">
+            <div class="section-content fade-in">
+                <h2 class="section-title">Tradiciones que Perduran</h2>
+                <div class="content-grid">
+                    <div class="content-text">
+                        <p>La cultura local vibra con la música de tamboras, el sonar del porro y los ecos de las danzas festivas. Las tradiciones no solo celebran el arte, sino también la identidad arraigada en generaciones.</p>
+                        <p>Cada festividad es una oportunidad para que la comunidad se reúna y mantenga vivas las costumbres que definen la esencia única de Pueblo Nuevo.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="Imagenes/Gaitas.jpg" alt="Tradiciones folclóricas de Pueblo Nuevo" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="business-grid">
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3 class="business-name">Festival del Porro</h3>
+                        <p>Celebración anual que reúne a los mejores intérpretes de este género musical tradicional, llenando las calles de ritmo y alegría contagiosa.</p>
+                    </div>
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="business-name">Fiestas Patronales</h3>
+                        <p>Festividades religiosas y culturales en honor a San Sebastián, con procesiones, danzas tradicionales y comidas típicas de la región.</p>
+                    </div>
+                    
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="business-name">Gastronomía Típica</h3>
+                        <p>Sabores auténticos que reflejan la mezcla cultural de la región, desde el tradicional sancocho hasta los dulces artesanales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="turismo">
+            <div class="section-content fade-in">
+                <h2 class="section-title">Sitios Turísticos</h2>
+                <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem; color: var(--neutral-600); max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Descubre los lugares más emblemáticos y hermosos de Pueblo Nuevo, cada uno con su propia historia y encanto especial.
+                </p>
+
+                <div class="cards-grid">
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Iglesia.jpg" alt="Parroquia Nuestra Señora de Lourdes" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Parroquia Nuestra Señora de Lourdes</h3>
+                            <p class="card-description">Epicentro de fe y arquitectura colonial, esta iglesia es un símbolo histórico y espiritual que define el corazón de Pueblo Nuevo.</p>
+                            <ul class="card-features">
+                                <li>Arquitectura colonial del siglo XX</li>
+                                <li>Festividades patronales en enero</li>
+                                <li>Arte religioso tradicional</li>
+                                <li>Centro de la vida espiritual local</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Rio.jpg" alt="Río San Jorge" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Río San Jorge</h3>
+                            <p class="card-description">Fuente de vida y recreación, el río ofrece paisajes naturales impresionantes y espacios ideales para la pesca artesanal.</p>
+                            <ul class="card-features">
+                                <li>Pesca deportiva y artesanal</li>
+                                <li>Paseos en lancha</li>
+                                <li>Observación de aves</li>
+                                <li>Atardeceres espectaculares</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Parque.jpg" alt="Parque Central" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Parque Central</h3>
+                            <p class="card-description">Corazón de la vida social del pueblo, punto de encuentro para locales y visitantes bajo la sombra de árboles centenarios.</p>
+                            <ul class="card-features">
+                                <li>Árboles centenarios</li>
+                                <li>Eventos culturales</li>
+                                <li>Zona de descanso</li>
+                                <li>Centro de actividades sociales</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Casa.jpg" alt="Casa de la Cultura" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Casa de la Cultura</h3>
+                            <p class="card-description">Centro neurálgico de la expresión artística local, donde se preservan tradiciones y se exhiben las obras de nuestros artistas.</p>
+                            <ul class="card-features">
+                                <li>Exposiciones de arte local</li>
+                                <li>Talleres culturales</li>
+                                <li>Biblioteca comunitaria</li>
+                                <li>Eventos artísticos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Puerto.jpg" alt="Ciénaga de Puerto Santo" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Ciénaga de Puerto Santo</h3>
+                            <p class="card-description">Ecosistema acuático único que alberga una gran diversidad de especies y ofrece paisajes naturales de extraordinaria belleza.</p>
+                            <ul class="card-features">
+                                <li>Ecosistema de humedal natural</li>
+                                <li>Avistamiento de aves acuáticas</li>
+                                <li>Pesca artesanal tradicional</li>
+                                <li>Paseos en canoa</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-image">
+                            <img src="Imagenes/Islas.jpg" alt="Islas Flotantes en Santa Rosa del Arcial" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Islas Flotantes en Santa Rosa del Arcial</h3>
+                            <p class="card-description">Formaciones naturales flotantes que crean un paisaje único y mágico, hogar de flora y fauna especializada.</p>
+                            <ul class="card-features">
+                                <li>Fenómeno natural único</li>
+                                <li>Vegetación flotante especializada</li>
+                                <li>Refugio de fauna acuática</li>
+                                <li>Experiencia de navegación única</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comercio">
+            <div class="section-content fade-in">
+                <h2 class="section-title">Comercio Local</h2>
+                <div class="content-grid">
+                    <div class="content-image">
+                        <img src="Imagenes/Vista.jpg" alt="Zona comercial del pueblo" loading="lazy">
+                    </div>
+                    <div class="content-text">
+                        <p>La gastronomía de Pueblo Nuevo refleja la riqueza cultural y los sabores auténticos de la región. Nuestros restaurantes locales ofrecen experiencias culinarias únicas que combinan tradición e innovación.</p>
+                        <p>Cada establecimiento gastronómico no solo sirve deliciosos platos, sino que también preserva las recetas tradicionales y crea espacios de encuentro donde se fortalecen los lazos comunitarios.</p>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+    <div class="info-card">
+        <div class="card-image">
+            <img src="Imagenes/Leña.png" alt="Leña Verde Restaurante Bar" loading="lazy">
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Leña Verde Restaurante Bar</h3>
+            <p class="card-description">Experiencia gastronómica única que combina los sabores tradicionales de la región con un ambiente acogedor y familiar.</p>
+            <ul class="card-features">
+                <li>Especialidades a la parrilla</li>
+                <li>Ambiente familiar y acogedor</li>
+                <li>Música en vivo los fines de semana</li>
+                <li>Terraza al aire libre</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-image">
+            <img src="Imagenes/Mace.png" alt="MACÉ Restaurante" loading="lazy">
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">MACÉ</h3>
+            <p class="card-description">Restaurante que ofrece una propuesta culinaria moderna con toques tradicionales, destacando por su excelente servicio y calidad.</p>
+            <ul class="card-features">
+                <li>Cocina moderna y tradicional</li>
+                <li>Ingredientes frescos locales</li>
+                <li>Servicio de primera calidad</li>
+                <li>Ambiente elegante y moderno</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-image">
+            <img src="Imagenes/Donde.png" alt="Donde PETRA Restaurante" loading="lazy">
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">Donde PETRA</h3>
+            <p class="card-description">Restaurante tradicional que mantiene viva la esencia de la cocina cordobesa con recetas familiares transmitidas de generación en generación.</p>
+            <ul class="card-features">
+                <li>Cocina tradicional cordobesa</li>
+                <li>Recetas familiares auténticas</li>
+                <li>Atención personalizada</li>
+                <li>Ambiente tradicional y cálido</li>
+            </ul>
+        </div>
+    </div>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Raíces Vivas - Universidad de Córdoba</p>
+        </div>
+    </footer>
+
+    <script>
+        // Slider optimizado
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.paisaje-slide');
+        const totalSlides = slides.length;
+        const slider = document.getElementById('paisajesSlider');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        // Crear dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            updateSlider();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateSlider();
+        }
+
+        // Inicializar el slider
+        updateSlider();
+
+        // Auto-play
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Navegación suave
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animaciones al scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Elementos visibles al cargar
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
